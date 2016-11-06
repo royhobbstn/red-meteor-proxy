@@ -18,6 +18,7 @@
   "homepage": "https://github.com/royhobbstn/red-meteor-proxy#readme",
   "dependencies": {
     "express": "^4.14.0",
-    "redbird": "^0.6.5"
+    "http-proxy": "^1.15.2",
+    "redbird": "^0.5.2"
   }
 }
