@@ -24,11 +24,11 @@ app.all('/*', function (req, res, next) {
   }
 });
 
+
 app.get('/test', function (req, res) {
-
   res.status(200).send("success");
-
 });
+
 
 http.createServer(app).listen(HTTP_PORT).on('listening', function () {
   return console.log("HTTP to HTTPS redirect app launched.");
