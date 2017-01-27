@@ -40,9 +40,9 @@ http.createServer(app).listen(HTTP_PORT).on('listening', function () {
 
 var sslobj = {
   port: 443,
-  key: 'ssl/docker/privkey.pem',
-  cert: 'ssl/docker/fullchain.pem',
-  ca: 'ssl/docker/chain.pem'
+  key: 'ssl/docker/privkey1.pem',
+  cert: 'ssl/docker/fullchain1.pem',
+  ca: 'ssl/docker/chain1.pem'
 };
 
 var redbird = require('redbird')({
@@ -51,9 +51,9 @@ var redbird = require('redbird')({
   ssl: sslobj
 });
 
-redbird.register('www.red-meteor.com/mlb', 'http://mlb:4000', {
+redbird.register('red-meteor.com/mlb', 'http://mlb:4000', {
   ssl: true
 });
-redbird.register('www.red-meteor.com/censusVectorTiles', 'http://censusVectorTiles:4001', {
+redbird.register('red-meteor.com/censusVectorTiles', 'http://censusVectorTiles:4001', {
   ssl: true
 });
