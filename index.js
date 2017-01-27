@@ -1,31 +1,36 @@
-
-
 //redirect http to https
 
 // http://heyrod.com/snippets/redirect-http-to-https-in-expressjs.html
 var http = require('http');
 var express = require('express');
-var HTTP_PORT  = 3501;
+var HTTP_PORT = 80;
 var HTTPS_PORT = 443;
 
-var http_app = express();
-http_app.set('port', HTTP_PORT);
+var app = express();
+app.set('port', HTTP_PORT);
 
-http_app.all('/*', function(req, res, next) {
+app.all('/*', function (req, res, next) {
   if (/^http$/.test(req.protocol)) {
     var host = req.headers.host.replace(/:[0-9]+$/g, ""); // strip the port # if any
     if ((HTTPS_PORT != null) && HTTPS_PORT !== 443) {
       return res.redirect("https://" + host + ":" + HTTPS_PORT + req.url, 301);
-    } else {
+    }
+    else {
       return res.redirect("https://" + host + req.url, 301);
     }
-  } else {
+  }
+  else {
     return next();
   }
 });
 
+app.get('/test', function (req, res) {
 
-http.createServer(http_app).listen(HTTP_PORT).on('listening', function() {
+  res.status(200).send("success");
+
+});
+
+http.createServer(app).listen(HTTP_PORT).on('listening', function () {
   return console.log("HTTP to HTTPS redirect app launched.");
 });
 
@@ -33,6 +38,22 @@ http.createServer(http_app).listen(HTTP_PORT).on('listening', function() {
 // redbird
 
 
-var redbird = require('redbird')({ port: 3500 });
-redbird.register('www.red-meteor.com/mlb', 'http://0.0.0.0:4000');
+var sslobj = {
+  port: 443,
+  key: 'ssl/docker/privkey.pem',
+  cert: 'ssl/docker/fullchain.pem',
+  ca: 'ssl/docker/chain.pem'
+};
 
+var redbird = require('redbird')({
+  port: 443,
+  xfwd: false,
+  ssl: sslobj
+});
+
+redbird.register('www.red-meteor.com/mlb', 'http://mlb:4000', {
+  ssl: true
+});
+redbird.register('www.red-meteor.com/censusVectorTiles', 'http://censusVectorTiles:4001', {
+  ssl: true
+});
