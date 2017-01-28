@@ -6,21 +6,17 @@ var express = require('express');
 var HTTP_PORT = 80;
 var HTTPS_PORT = 443;
 
-var app = express();
-app.set('port', HTTP_PORT);
+var http_app = express();
+http_app.set('port', HTTP_PORT);
 
-
-app.all('/*', function (req, res, next) {
-  console.log(req.headers);
+http_app.all('/*', function (req, res, next) {
   if (/^http$/.test(req.protocol)) {
-    console.log('path1');
     var host = req.headers.host.replace(/:[0-9]+$/g, ""); // strip the port # if any
     if ((HTTPS_PORT != null) && HTTPS_PORT !== 443) {
-      console.log('path2');
-      return res.redirect(301, "https://" + host + ":" + HTTPS_PORT + req.url);
+      return res.redirect("https://" + host + ":" + HTTPS_PORT + req.url, 301);
     }
     else {
-      return res.redirect(301, "https://" + host + req.url);
+      return res.redirect("https://" + host + req.url, 301);
     }
   }
   else {
@@ -29,17 +25,12 @@ app.all('/*', function (req, res, next) {
 });
 
 
-app.get('/test', function (req, res) {
-  res.status(200).send("success");
-});
-
-
-http.createServer(app).listen(HTTP_PORT).on('listening', function () {
+http.createServer(http_app).listen(HTTP_PORT).on('listening', function () {
   return console.log("HTTP to HTTPS redirect app launched.");
 });
 
 
-// redbird
+// Redbird
 
 
 var sslobj = {
@@ -56,15 +47,12 @@ var redbird = require('redbird')({
   ssl: sslobj
 });
 
-
-// redbird.register('red-meteor.com/mlb', 'http://mlb:4000', {
-//   ssl: true
-// });
-
-// redbird.register('red-meteor.com/censusVectorTiles', 'http://censusVectorTiles:4001', {
-//   ssl: true
-// });
-
-// redbird.register('red-meteor.com/census-api', 'http://censusapi:4002', {
-//   ssl: true
-// });
+redbird.register('red-meteor.com/mlb', 'http://mlb:4000', {
+  ssl: true
+});
+redbird.register('red-meteor.com/censusvectortiles', 'http://censusvectortiles:4001', {
+  ssl: true
+});
+redbird.register('red-meteor.com/censusapi', 'http://censusapi:4002', {
+  ssl: true
+});
