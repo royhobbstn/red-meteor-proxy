@@ -57,14 +57,14 @@ var redbird = require('redbird')({
 });
 
 
-redbird.register('red-meteor.com/mlb', 'http://mlb:4000', {
-  ssl: true
-});
+// redbird.register('red-meteor.com/mlb', 'http://mlb:4000', {
+//   ssl: true
+// });
 
-redbird.register('red-meteor.com/censusVectorTiles', 'http://censusVectorTiles:4001', {
-  ssl: true
-});
+// redbird.register('red-meteor.com/censusVectorTiles', 'http://censusVectorTiles:4001', {
+//   ssl: true
+// });
 
-redbird.register('red-meteor.com/census-api', 'http://censusapi:4002', {
-  ssl: true
-});
+// redbird.register('red-meteor.com/census-api', 'http://censusapi:4002', {
+//   ssl: true
+// });
