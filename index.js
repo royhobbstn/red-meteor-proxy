@@ -47,12 +47,13 @@ var redbird = require('redbird')({
   ssl: sslobj
 });
 
-redbird.register('red-meteor.com/mlb', 'http://mlb:4000', {
+
+redbird.register('red-meteor.com/mlb', 'http://red-meteor.com:4000', {
   ssl: true
 });
-redbird.register('red-meteor.com/censusvectortiles', 'http://censusvectortiles:4001', {
+redbird.register('red-meteor.com/censusvectortiles', 'http://red-meteor.com:4001', {
   ssl: true
 });
-redbird.register('red-meteor.com/censusapi', 'http://censusapi:4002', {
+redbird.register('red-meteor.com/censusapi', 'http://red-meteor.com:4002', {
   ssl: true
 });
