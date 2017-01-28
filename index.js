@@ -20,19 +20,16 @@ app.all('/*', function (req, res, next) {
       return res.redirect(301, "https://" + host + ":" + HTTPS_PORT + req.url);
     }
     else {
-      console.log('path3');
       return res.redirect(301, "https://" + host + req.url);
     }
   }
   else {
-    console.log('path4');
     return next();
   }
 });
 
 
 app.get('/test', function (req, res) {
-  console.log('test');
   res.status(200).send("success");
 });
 
@@ -52,15 +49,18 @@ var sslobj = {
   ca: 'ssl/docker/chain1.pem'
 };
 
+
 var redbird = require('redbird')({
   port: 443,
   xfwd: false,
   ssl: sslobj
 });
 
-// redbird.register('red-meteor.com/mlb', 'http://mlb:4000', {
-//   ssl: true
-// });
-// redbird.register('red-meteor.com/censusVectorTiles', 'http://censusVectorTiles:4001', {
-//   ssl: true
-// });
+
+redbird.register('red-meteor.com/mlb', 'http://mlb:4000', {
+  ssl: true
+});
+
+redbird.register('red-meteor.com/censusVectorTiles', 'http://censusVectorTiles:4001', {
+  ssl: true
+});
