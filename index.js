@@ -9,23 +9,30 @@ var HTTPS_PORT = 443;
 var app = express();
 app.set('port', HTTP_PORT);
 
+
 app.all('/*', function (req, res, next) {
+  console.log(req.headers);
   if (/^http$/.test(req.protocol)) {
+    console.log('path1');
     var host = req.headers.host.replace(/:[0-9]+$/g, ""); // strip the port # if any
     if ((HTTPS_PORT != null) && HTTPS_PORT !== 443) {
-      return res.redirect("https://" + host + ":" + HTTPS_PORT + req.url, 301);
+      console.log('path2');
+      return res.redirect(301, "https://" + host + ":" + HTTPS_PORT + req.url);
     }
     else {
-      return res.redirect("https://" + host + req.url, 301);
+      console.log('path3');
+      return res.redirect(301, "https://" + host + req.url);
     }
   }
   else {
+    console.log('path4');
     return next();
   }
 });
 
 
 app.get('/test', function (req, res) {
+  console.log('test');
   res.status(200).send("success");
 });
 
@@ -51,9 +58,9 @@ var redbird = require('redbird')({
   ssl: sslobj
 });
 
-redbird.register('red-meteor.com/mlb', 'http://mlb:4000', {
-  ssl: true
-});
-redbird.register('red-meteor.com/censusVectorTiles', 'http://censusVectorTiles:4001', {
-  ssl: true
-});
+// redbird.register('red-meteor.com/mlb', 'http://mlb:4000', {
+//   ssl: true
+// });
+// redbird.register('red-meteor.com/censusVectorTiles', 'http://censusVectorTiles:4001', {
+//   ssl: true
+// });
