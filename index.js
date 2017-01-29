@@ -25,9 +25,16 @@ http_app.all('/*', function (req, res, next) {
 });
 
 
+http_app.get('/', function (req, res) {
+  res.redirect('https://maputopia.com/portfolio' + req.url)
+});
+
+
 http.createServer(http_app).listen(HTTP_PORT).on('listening', function () {
   return console.log("HTTP to HTTPS redirect app launched.");
 });
+
+
 
 
 // Redbird
