@@ -9,6 +9,7 @@ var HTTPS_PORT = 443;
 var http_app = express();
 http_app.set('port', HTTP_PORT);
 
+
 http_app.all('/*', function (req, res, next) {
   if (/^http$/.test(req.protocol)) {
     var host = req.headers.host.replace(/:[0-9]+$/g, ""); // strip the port # if any
@@ -25,15 +26,10 @@ http_app.all('/*', function (req, res, next) {
 });
 
 
-http_app.get('/', function (req, res) {
-  res.redirect('https://maputopia.com/portfolio' + req.url)
-});
-
 
 http.createServer(http_app).listen(HTTP_PORT).on('listening', function () {
   return console.log("HTTP to HTTPS redirect app launched.");
 });
-
 
 
 
@@ -67,3 +63,5 @@ redbird.register('red-meteor.com/censusapi', 'http://red-meteor.com:4002', {
 redbird.register('red-meteor.com', 'http://red-meteor.com:4003', {
   ssl: true
 });
+
+redbird.register("/", "https://maputopia.com/portfolio");
