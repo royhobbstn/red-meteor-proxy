@@ -55,6 +55,7 @@ var redbird = require('redbird')({
 redbird.register('red-meteor.com/mlb', 'http://red-meteor.com:4000', {
   ssl: true
 });
+
 redbird.register('red-meteor.com/censusvectortiles', 'http://red-meteor.com:4001', {
   ssl: true
 });
@@ -63,4 +64,4 @@ redbird.register('red-meteor.com/censusapi', 'http://red-meteor.com:4002', {
 });
 
 
-redbird.register("red-meteor.com/", "https://maputopia.com/portfolio");
+redbird.register("https://red-meteor.com", "https://maputopia.com/portfolio");
