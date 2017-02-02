@@ -60,8 +60,6 @@ redbird.register('red-meteor.com/censusvectortiles', 'http://red-meteor.com:4001
 redbird.register('red-meteor.com/censusapi', 'http://red-meteor.com:4002', {
   ssl: true
 });
-redbird.register('red-meteor.com', 'http://red-meteor.com:4003', {
-  ssl: true
-});
 
-redbird.register("/", "https://maputopia.com/portfolio");
+
+redbird.register("red-meteor.com", "https://maputopia.com/portfolio");
