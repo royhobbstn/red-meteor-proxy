@@ -25,6 +25,7 @@ http_app.all('/*', function (req, res, next) {
   }
 });
 
+
 http.createServer(http_app).listen(HTTP_PORT).on('listening', function () {
   return console.log("HTTP to HTTPS redirect app launched.");
 });
